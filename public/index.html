@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTEV Connect | Chat en Tiempo Real</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Registro -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="app-logo"><i class="fa-solid fa-bolt-lightning"></i></div>
+            <h2>¡Bienvenido a CTEV Connect!</h2>
+            <p>Ingresa tu apodo para unirte a la sala de conversación.</p>
+            <form id="login-form">
+                <label for="username-input">NOMBRE DE USUARIO</label>
+                <input type="text" id="username-input" placeholder="Ej. Luis_Dev" maxlength="20" required autocomplete="off">
+                <button type="submit">Entrar al Chat</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Layout Principal -->
+    <div class="app-layout">
+        <!-- 1. Barra Lateral de Canales -->
+        <aside class="channels-sidebar">
+            <header class="space-header">
+                <h3>Comunidad CTEV</h3>
+            </header>
+
+            <div class="channels-category">
+                <span class="category-title">CANALES DE TEXTO</span>
+                <ul class="channels-list">
+                    <li class="channel-item active" data-channel="general"><i class="fa-solid fa-hashtag"></i> general</li>
+                    <li class="channel-item" data-channel="proyectos-node"><i class="fa-solid fa-hashtag"></i> proyectos-node</li>
+                    <li class="channel-item" data-channel="recursos"><i class="fa-solid fa-hashtag"></i> recursos</li>
+                </ul>
+            </div>
+
+            <!-- Profile Footer -->
+            <div class="user-profile-footer">
+                <div id="user-avatar-footer" class="avatar-circle">?</div>
+                <div class="user-info-text">
+                    <span id="current-user-display" class="username">Cargando...</span>
+                    <span class="user-status"><i class="fa-solid fa-circle"></i> En línea</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 2. Área Central del Chat -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <div class="channel-title">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <h2 id="current-channel-title">general</h2>
+                </div>
+            </header>
+
+            <!-- Historial de Mensajes -->
+            <div id="messages-box" class="messages-box">
+                <div class="channel-welcome">
+                    <div class="welcome-icon"><i class="fa-solid fa-hashtag"></i></div>
+                    <h1 id="welcome-channel-title">¡Bienvenido al canal #general!</h1>
+                    <p>Este es el inicio de la conversación en tiempo real para este canal.</p>
+                </div>
+            </div>
+
+            <!-- Indicador de "Escribiendo..." -->
+            <div id="typing-indicator" class="typing-indicator hidden">
+                <span class="dots"><i class="fa-solid fa-ellipsis fa-beat"></i></span>
+                <span id="typing-text">Alguien está escribiendo...</span>
+            </div>
+
+            <!-- Input para Enviar Mensaje -->
+            <form id="chat-form" class="chat-input-container">
+                <div class="input-wrapper">
+                    <input type="text" id="message-input" placeholder="Enviar mensaje a #general" autocomplete="off" required>
+                    <button type="submit" class="send-btn" title="Enviar"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </main>
+
+        <!-- 3. Panel Derecho (Miembros Conectados) -->
+        <aside class="members-sidebar">
+            <div class="members-group">
+                <span class="group-title">MIEMBROS EN ESTE CANAL — <span id="user-count">0</span></span>
+                <ul id="users-list" class="members-list"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "chat-tiempo-real-socketio",
+  "version": "1.0.0",
+  "description": "Aplicación de chat en tiempo real con Node.js y Socket.IO",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
